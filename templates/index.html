@@ -96,7 +96,7 @@ body {
 <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 <script>
 function get_all_list() {
-  fetch("http://localhost:5000/todos")
+  fetch("http://todo-gg.herokuapp.com/todos")
     .then(function(response) {
       return response.json();
     })
@@ -112,7 +112,7 @@ function get_all_list() {
     });
 }
 function delete_task(todo_key) {
-  var url = "http://localhost:5000/todos/" + todo_key
+  var url = "http://todo-gg.herokuapp.com/todos/" + todo_key
   fetch(url, {
     method: "DELETE"
   })
@@ -120,7 +120,7 @@ function delete_task(todo_key) {
 }
 function new_task() {
   var task = "task=" + document.getElementById("task").value
-  fetch("http://localhost:5000/todos", {
+  fetch("http://todo-gg.herokuapp.com/todos", {
     body: task,
     headers: {
       "Content-Type": "application/x-www-form-urlencoded"
