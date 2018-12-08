@@ -75,7 +75,7 @@ body {
     padding: 14px;
   }
   .topnav input[type=text] {
-    border: 1px solid #ccc;  
+    border: 1px solid #ccc;
   }
 }
 </style>
@@ -91,10 +91,21 @@ body {
 </div>
 
 <div class="tasks"></div>
-
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/1.4.8/socket.io.min.js"></script>
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
-<script>
+
+<script type="text/javascript">
+
+
+function delete_task(todo_key) {
+    var url = "http://localhost:5000/todos/" + todo_key
+    fetch(url, {
+      method: "DELETE"
+    })
+    get_all_list()
+    get_all_list()
+  }
 function get_all_list() {
   fetch("http://localhost:5000/todos")
     .then(function(response) {
@@ -105,18 +116,11 @@ function get_all_list() {
       $(".tasks").empty();
       Object.keys(myJson).forEach(function(key) {
         $(".tasks").prepend('<div class="w3-container" style="margin-top:20px"><div class="w3-card-4" style="width:50%"><header class="w3-container w3-light-grey"><h3 id="title"></h3></header><div class="w3-container"><p id=todo_message></p><br></div><button id="todo_key" onclick="delete_task(this.id)" class="w3-button w3-block w3-dark-grey">- Remove</button></div></div>');
-        document.getElementById("todo_key").id = key
-        document.getElementById("title").innerHTML = key;
+        document.getElementById("todo_key").id = myJson[key]['name'];
+        document.getElementById("title").innerHTML = myJson[key]['name'];
         document.getElementById("todo_message").innerHTML = myJson[key]['task'];
       })
     });
-}
-function delete_task(todo_key) {
-  var url = "http://localhost:5000/todos/" + todo_key
-  fetch(url, {
-    method: "DELETE"
-  })
-  get_all_list()
 }
 function new_task() {
   var task = "task=" + document.getElementById("task").value
@@ -127,6 +131,7 @@ function new_task() {
     },
     method: "POST"
   })
+  get_all_list()
   get_all_list()
 }
 </script>

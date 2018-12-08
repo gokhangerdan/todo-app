@@ -1,2 +1,4 @@
 Flask==1.0.2
-Flask_RESTful==0.3.6
+Flask-RESTful==0.3.6
+pymongo==3.7.1
+
