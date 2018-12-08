@@ -1,2 +1,3 @@
 # todo-app
-Todo app to learn js
+
+Todo app with js,flask,pymongo
