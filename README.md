@@ -1,3 +1,3 @@
 # todo-app
 
-Todo app with js,flask
+Todo app with js, flask, pymongo
